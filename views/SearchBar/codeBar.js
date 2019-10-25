@@ -4,9 +4,8 @@ var selecetedSearchID;  //Stores searchID of clicked item
 
 //Function which runs after the document is completely loaded
 function onDocReady(){
-  //A subjectsList containing all the subjects\
-  $('#myInput').val('');
-  searchBarSetup($('#myInput'));
+  //A subjectsList containing all the subjects
+  codeBarSetup($('#subjectCode'));
 
   $('#searchSubject').click(function(){
     //Write code to call controller
@@ -23,7 +22,7 @@ $(onDocReady);
 
 
 //Sets up the searchBar
-function searchBarSetup(inp) {
+function codeBarSetup(inp) {
   var currentFocus;
 
   inp.on('input', function(e) {
@@ -53,7 +52,8 @@ function searchBarSetup(inp) {
       //Use controllers result and display it in dropdown
       result.forEach(function (item){
         sItem = $('<div>');
-        suggestionLink = item.information.subjectName + ' (' + item.information.subjectCode + ')';
+        console.log('Hello from codeBar');
+        suggestionLink = item.information.subjectCode ;
         suggestionLink += "<input type='hidden' value='" + item.information.subjectCode + "'>";
         sItem.html(suggestionLink);
         sItem.on('click', function(e) {

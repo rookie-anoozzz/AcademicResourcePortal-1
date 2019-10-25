@@ -1,19 +1,18 @@
 
-var selecetedSearchID;  //Stores searchID of clicked item
+var subjectID;  //Stores searchID of clicked item
 
 
 //Function which runs after the document is completely loaded
 function onDocReady(){
-  //A subjectsList containing all the subjects\
-  $('#myInput').val('');
-  searchBarSetup($('#myInput'));
+  //A subjectsList containing all the subjects
+  subjectBarSetup($('#subjectName'));
 
   $('#searchSubject').click(function(){
     //Write code to call controller
-    console.log(selecetedSearchID);
+    console.log(subjectID);
     // With an assumption that selectedSearchID = subject code
-    if(selecetedSearchID){
-    	window.location.href = 'SubjectTemplate.html?subCode=' + selecetedSearchID;
+    if(subjectID){
+    	window.location.href = 'SubjectTemplate.html?subCode=' + subjectID;
     }
     return false;
   });
@@ -23,7 +22,7 @@ $(onDocReady);
 
 
 //Sets up the searchBar
-function searchBarSetup(inp) {
+function subjectBarSetup(inp) {
   var currentFocus;
 
   inp.on('input', function(e) {
@@ -53,13 +52,14 @@ function searchBarSetup(inp) {
       //Use controllers result and display it in dropdown
       result.forEach(function (item){
         sItem = $('<div>');
-        suggestionLink = item.information.subjectName + ' (' + item.information.subjectCode + ')';
-        suggestionLink += "<input type='hidden' value='" + item.information.subjectCode + "'>";
+        console.log('Hello from subjectBar');
+        suggestionLink = item.information.subjectName ;
+        suggestionLink += "<input type='hidden'>";
         sItem.html(suggestionLink);
         sItem.on('click', function(e) {
             //Set value of the input field to be clicked subject name
             inp.val($(this).text());
-            selecetedSearchID = $(this).find('input').val();
+            subjectID = $(this).find('input').val();
             closeAllLists();
         });
         sContainer.append(sItem);
